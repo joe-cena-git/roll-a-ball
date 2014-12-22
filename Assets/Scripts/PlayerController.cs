@@ -1,9 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
 
 	public float speed;
+	public Text countText;
+	public Text winText;
+	private int count;
+
+	void Start()
+	{
+		count = 0;
+		updateCount ();
+	}
 
 	void FixedUpdate ()
 	{
@@ -20,6 +30,17 @@ public class PlayerController : MonoBehaviour {
 		if (other.gameObject.tag == "PickUp") 
 		{
 			other.gameObject.SetActive(false);
+			count++;
+			updateCount();
+		}
+	}
+
+	void updateCount()
+	{
+		countText.text = count.ToString () + " / 8";
+		if (count >= 8)
+		{
+			winText.text = "YOU WIN!";
 		}
 	}
 }
